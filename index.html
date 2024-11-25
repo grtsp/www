@@ -47,6 +47,119 @@
             </div>
 
             <div class="feature-card">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                    <defs>
+                        <style>
+                            .grid-line {
+                                stroke: #2C3E50;
+                                stroke-width: 2;
+                            }
+
+                            .inner-square {
+                                fill: #3498DB;
+                                opacity: 0.6;
+                            }
+
+                            @keyframes moveLineDown {
+                                0%, 100% { transform: translateY(0); }
+                                50% { transform: translateY(140px); }
+                            }
+
+                            @keyframes moveLineRight {
+                                0%, 100% { transform: translateX(0); }
+                                50% { transform: translateX(140px); }
+                            }
+
+                            @keyframes pulse1 {
+                                0%, 100% { transform: scale(0.3); }
+                                50% { transform: scale(0.9); }
+                            }
+
+                            @keyframes pulse2 {
+                                0%, 100% { transform: scale(0.9); }
+                                50% { transform: scale(0.3); }
+                            }
+
+                            .first-horizontal {
+                                animation: moveLineDown 8s infinite ease-in-out;
+                            }
+
+                            .first-vertical {
+                                animation: moveLineRight 8s infinite ease-in-out;
+                            }
+
+                            .pulse-group-1 {
+                                animation: pulse1 3s infinite ease-in-out;
+                            }
+
+                            .pulse-group-2 {
+                                animation: pulse2 3s infinite ease-in-out;
+                            }
+                        </style>
+                    </defs>
+
+                    <!-- Animowane linie -->
+                    <g>
+                        <!-- Pierwsza pozioma linia (ruchoma w dół) -->
+                        <line x1="0" y1="100" x2="300" y2="100" class="grid-line first-horizontal"/>
+                        <!-- Pierwsza pionowa linia (ruchoma w prawo) -->
+                        <line x1="100" y1="0" x2="100" y2="300" class="grid-line first-vertical"/>
+                    </g>
+
+                    <!-- Grupa 1: Narożniki + Środek -->
+                    <g class="pulse-group-1">
+                        <!-- Lewy górny -->
+                        <rect x="10" y="10" width="80" height="80" class="inner-square">
+                            <title>Cell 1</title>
+                        </rect>
+
+                        <!-- Prawy górny -->
+                        <rect x="210" y="10" width="80" height="80" class="inner-square">
+                            <title>Cell 3</title>
+                        </rect>
+
+                        <!-- Środek -->
+                        <rect x="110" y="110" width="80" height="80" class="inner-square">
+                            <title>Cell 5</title>
+                        </rect>
+
+                        <!-- Lewy dolny -->
+                        <rect x="10" y="210" width="80" height="80" class="inner-square">
+                            <title>Cell 7</title>
+                        </rect>
+
+                        <!-- Prawy dolny -->
+                        <rect x="210" y="210" width="80" height="80" class="inner-square">
+                            <title>Cell 9</title>
+                        </rect>
+                    </g>
+
+                    <!-- Grupa 2: Środki krawędzi -->
+                    <g class="pulse-group-2">
+                        <!-- Górny środkowy -->
+                        <rect x="110" y="10" width="80" height="80" class="inner-square">
+                            <title>Cell 2</title>
+                        </rect>
+
+                        <!-- Prawy środkowy -->
+                        <rect x="210" y="110" width="80" height="80" class="inner-square">
+                            <title>Cell 6</title>
+                        </rect>
+
+                        <!-- Dolny środkowy -->
+                        <rect x="110" y="210" width="80" height="80" class="inner-square">
+                            <title>Cell 8</title>
+                        </rect>
+
+                        <!-- Lewy środkowy -->
+                        <rect x="10" y="110" width="80" height="80" class="inner-square">
+                            <title>Cell 4</title>
+                        </rect>
+                    </g>
+
+                    <!-- Obramowanie całości -->
+                    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#2C3E50" stroke-width="2"/>
+                </svg>
                 <h3 class="text-xl font-semibold mb-4">AGS</h3>
                 <p class="text-gray-600 mb-4">Adaptive Grid Sizing provides intelligent frame partitioning for optimal resource utilization.</p>
                 <ul class="space-y-2">
