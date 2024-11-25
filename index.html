@@ -16,6 +16,58 @@
         .tech-badge {
             @apply px-3 py-1 rounded-full text-sm font-semibold;
         }
+
+    </style>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            padding: 2rem;
+            background: #f5f5f5;
+            line-height: 1.5;
+        }
+
+        .json-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .key {
+            color: #881391;
+        }
+
+        .string {
+            color: #22863a;
+        }
+
+        .number {
+            color: #005cc5;
+        }
+
+        .boolean {
+            color: #0033b3;
+        }
+
+        .null {
+            color: #808080;
+        }
+
+        .indent {
+            margin-left: 2rem;
+        }
+
+        pre {
+            margin: 0;
+            white-space: pre-wrap;
+        }
+        .content {
+            width: 50%;
+            margin: 0;
+
+        }
     </style>
 </head>
 <body class="bg-gray-50">
@@ -38,7 +90,41 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div class="feature-card">
                 <h3 class="text-xl font-semibold mb-4">LSDO</h3>
-                <p class="text-gray-600 mb-4">Layered Streaming with Dynamic Objects enables intelligent object-based streaming with dynamic quality adaptation.</p>
+
+                <div class="content json-container">
+        <pre>{
+  <span class="key">"masks"</span>: [
+    {
+      <span class="key">"id"</span>: <span class="string">"privacy-center"</span>,
+      <span class="key">"name"</span>: <span class="string">"Central Privacy Bar"</span>,
+      <span class="key">"svg"</span>: <span class="string">"&lt;rect x='50%' y='35%' width='40%' height='50%' fill='red' /&gt;"</span>,
+      <span class="key">"opacity"</span>: <span class="number">0.5</span>,
+      <span class="key">"enabled"</span>: <span class="boolean">true</span>
+    },
+    {
+      <span class="key">"id"</span>: <span class="string">"quality-warning"</span>,
+      <span class="key">"name"</span>: <span class="string">"Low Quality Warning"</span>,
+      <span class="key">"svg"</span>: <span class="string">"&lt;text x='50%' y='10%' text-anchor='middle' fill='red' font-size='24px'&gt;Low Quality Stream&lt;/text&gt;"</span>,
+      <span class="key">"opacity"</span>: <span class="number">0.8</span>,
+      <span class="key">"startTime"</span>: <span class="null">null</span>,
+      <span class="key">"endTime"</span>: <span class="null">null</span>,
+      <span class="key">"enabled"</span>: <span class="boolean">false</span>,
+      <span class="key">"maxBitrate"</span>: <span class="number">5</span>,
+      <span class="key">"minBitrate"</span>: <span class="number">0</span>
+    },
+    {
+      <span class="key">"id"</span>: <span class="string">"high-quality-overlay"</span>,
+      <span class="key">"name"</span>: <span class="string">"HD Quality Indicator"</span>,
+      <span class="key">"svg"</span>: <span class="string">"&lt;text x='85%' y='10%' style='stroke:white; stroke-width: 0; fill:white' font-size='50px'&gt;fullHD&lt;/text&gt;"</span>,
+      <span class="key">"opacity"</span>: <span class="number">0.7</span>,
+      <span class="key">"enabled"</span>: <span class="boolean">false</span>,
+      <span class="key">"minBitrate"</span>: <span class="number">20</span>
+    }
+  ]
+}</pre>
+                </div>
+                <p class="text-gray-600 mb-4">Layered Streaming with Dynamic Objects enables intelligent object-based
+                    streaming with dynamic quality adaptation.</p>
                 <ul class="space-y-2">
                     <li>Dynamic object detection</li>
                     <li>Selective quality enhancement</li>
@@ -47,121 +133,144 @@
             </div>
 
             <div class="feature-card">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
-                    <defs>
-                        <style>
-                            .grid-line {
-                                stroke: #2C3E50;
-                                stroke-width: 2;
-                            }
 
-                            .inner-square {
-                                fill: #3498DB;
-                                opacity: 0.6;
-                            }
 
-                            @keyframes moveLineDown {
-                                0%, 100% { transform: translateY(0); }
-                                50% { transform: translateY(140px); }
-                            }
-
-                            @keyframes moveLineRight {
-                                0%, 100% { transform: translateX(0); }
-                                50% { transform: translateX(140px); }
-                            }
-
-                            @keyframes pulse1 {
-                                0%, 100% { transform: scale(0.3); }
-                                50% { transform: scale(0.9); }
-                            }
-
-                            @keyframes pulse2 {
-                                0%, 100% { transform: scale(0.9); }
-                                50% { transform: scale(0.3); }
-                            }
-
-                            .first-horizontal {
-                                animation: moveLineDown 8s infinite ease-in-out;
-                            }
-
-                            .first-vertical {
-                                animation: moveLineRight 8s infinite ease-in-out;
-                            }
-
-                            .pulse-group-1 {
-                                animation: pulse1 3s infinite ease-in-out;
-                            }
-
-                            .pulse-group-2 {
-                                animation: pulse2 3s infinite ease-in-out;
-                            }
-                        </style>
-                    </defs>
-
-                    <!-- Animowane linie -->
-                    <g>
-                        <!-- Pierwsza pozioma linia (ruchoma w dół) -->
-                        <line x1="0" y1="100" x2="300" y2="100" class="grid-line first-horizontal"/>
-                        <!-- Pierwsza pionowa linia (ruchoma w prawo) -->
-                        <line x1="100" y1="0" x2="100" y2="300" class="grid-line first-vertical"/>
-                    </g>
-
-                    <!-- Grupa 1: Narożniki + Środek -->
-                    <g class="pulse-group-1">
-                        <!-- Lewy górny -->
-                        <rect x="10" y="10" width="80" height="80" class="inner-square">
-                            <title>Cell 1</title>
-                        </rect>
-
-                        <!-- Prawy górny -->
-                        <rect x="210" y="10" width="80" height="80" class="inner-square">
-                            <title>Cell 3</title>
-                        </rect>
-
-                        <!-- Środek -->
-                        <rect x="110" y="110" width="80" height="80" class="inner-square">
-                            <title>Cell 5</title>
-                        </rect>
-
-                        <!-- Lewy dolny -->
-                        <rect x="10" y="210" width="80" height="80" class="inner-square">
-                            <title>Cell 7</title>
-                        </rect>
-
-                        <!-- Prawy dolny -->
-                        <rect x="210" y="210" width="80" height="80" class="inner-square">
-                            <title>Cell 9</title>
-                        </rect>
-                    </g>
-
-                    <!-- Grupa 2: Środki krawędzi -->
-                    <g class="pulse-group-2">
-                        <!-- Górny środkowy -->
-                        <rect x="110" y="10" width="80" height="80" class="inner-square">
-                            <title>Cell 2</title>
-                        </rect>
-
-                        <!-- Prawy środkowy -->
-                        <rect x="210" y="110" width="80" height="80" class="inner-square">
-                            <title>Cell 6</title>
-                        </rect>
-
-                        <!-- Dolny środkowy -->
-                        <rect x="110" y="210" width="80" height="80" class="inner-square">
-                            <title>Cell 8</title>
-                        </rect>
-
-                        <!-- Lewy środkowy -->
-                        <rect x="10" y="110" width="80" height="80" class="inner-square">
-                            <title>Cell 4</title>
-                        </rect>
-                    </g>
-
-                    <!-- Obramowanie całości -->
-                    <rect x="0" y="0" width="300" height="300" fill="none" stroke="#2C3E50" stroke-width="2"/>
-                </svg>
                 <h3 class="text-xl font-semibold mb-4">AGS</h3>
-                <p class="text-gray-600 mb-4">Adaptive Grid Sizing provides intelligent frame partitioning for optimal resource utilization.</p>
+
+                <div class="content svg-container">
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                        <defs>
+                            <style>
+                                .grid-line {
+                                    stroke: #2C3E50;
+                                    stroke-width: 2;
+                                }
+
+                                .inner-square {
+                                    fill: #3498DB;
+                                    opacity: 0.6;
+                                }
+
+                                @keyframes moveLineDown {
+                                    0%, 100% {
+                                        transform: translateY(0);
+                                    }
+                                    50% {
+                                        transform: translateY(140px);
+                                    }
+                                }
+
+                                @keyframes moveLineRight {
+                                    0%, 100% {
+                                        transform: translateX(0);
+                                    }
+                                    50% {
+                                        transform: translateX(140px);
+                                    }
+                                }
+
+                                @keyframes pulse1 {
+                                    0%, 100% {
+                                        transform: scale(0.3);
+                                    }
+                                    50% {
+                                        transform: scale(0.9);
+                                    }
+                                }
+
+                                @keyframes pulse2 {
+                                    0%, 100% {
+                                        transform: scale(0.9);
+                                    }
+                                    50% {
+                                        transform: scale(0.3);
+                                    }
+                                }
+
+                                .first-horizontal {
+                                    animation: moveLineDown 8s infinite ease-in-out;
+                                }
+
+                                .first-vertical {
+                                    animation: moveLineRight 8s infinite ease-in-out;
+                                }
+
+                                .pulse-group-1 {
+                                    animation: pulse1 3s infinite ease-in-out;
+                                }
+
+                                .pulse-group-2 {
+                                    animation: pulse2 3s infinite ease-in-out;
+                                }
+                            </style>
+                        </defs>
+
+                        <!-- Animowane linie -->
+                        <g>
+                            <!-- Pierwsza pozioma linia (ruchoma w dół) -->
+                            <line x1="0" y1="100" x2="300" y2="100" class="grid-line first-horizontal"/>
+                            <!-- Pierwsza pionowa linia (ruchoma w prawo) -->
+                            <line x1="100" y1="0" x2="100" y2="300" class="grid-line first-vertical"/>
+                        </g>
+
+                        <!-- Grupa 1: Narożniki + Środek -->
+                        <g class="pulse-group-1">
+                            <!-- Lewy górny -->
+                            <rect x="10" y="10" width="80" height="80" class="inner-square">
+                                <title>Cell 1</title>
+                            </rect>
+
+                            <!-- Prawy górny -->
+                            <rect x="210" y="10" width="80" height="80" class="inner-square">
+                                <title>Cell 3</title>
+                            </rect>
+
+                            <!-- Środek -->
+                            <rect x="110" y="110" width="80" height="80" class="inner-square">
+                                <title>Cell 5</title>
+                            </rect>
+
+                            <!-- Lewy dolny -->
+                            <rect x="10" y="210" width="80" height="80" class="inner-square">
+                                <title>Cell 7</title>
+                            </rect>
+
+                            <!-- Prawy dolny -->
+                            <rect x="210" y="210" width="80" height="80" class="inner-square">
+                                <title>Cell 9</title>
+                            </rect>
+                        </g>
+
+                        <!-- Grupa 2: Środki krawędzi -->
+                        <g class="pulse-group-2">
+                            <!-- Górny środkowy -->
+                            <rect x="110" y="10" width="80" height="80" class="inner-square">
+                                <title>Cell 2</title>
+                            </rect>
+
+                            <!-- Prawy środkowy -->
+                            <rect x="210" y="110" width="80" height="80" class="inner-square">
+                                <title>Cell 6</title>
+                            </rect>
+
+                            <!-- Dolny środkowy -->
+                            <rect x="110" y="210" width="80" height="80" class="inner-square">
+                                <title>Cell 8</title>
+                            </rect>
+
+                            <!-- Lewy środkowy -->
+                            <rect x="10" y="110" width="80" height="80" class="inner-square">
+                                <title>Cell 4</title>
+                            </rect>
+                        </g>
+
+                        <!-- Obramowanie całości -->
+                        <rect x="0" y="0" width="300" height="300" fill="none" stroke="#2C3E50" stroke-width="2"/>
+                    </svg>
+                </div>
+                <p class="text-gray-600 mb-4">Adaptive Grid Sizing provides intelligent frame partitioning for optimal
+                    resource utilization.</p>
                 <ul class="space-y-2">
                     <li>Dynamic grid adaptation</li>
                     <li>ML-driven optimization</li>
@@ -171,7 +280,8 @@
 
             <div class="feature-card">
                 <h3 class="text-xl font-semibold mb-4">ML Integration</h3>
-                <p class="text-gray-600 mb-4">Built-in machine learning capabilities for intelligent streaming decisions.</p>
+                <p class="text-gray-600 mb-4">Built-in machine learning capabilities for intelligent streaming
+                    decisions.</p>
                 <ul class="space-y-2">
                     <li>Real-time object detection</li>
                     <li>Predictive streaming</li>
