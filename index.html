@@ -5,127 +5,334 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gRTSP - Next Generation Video Streaming Protocol</title>
     <style>
+        /* Modern CSS Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Base Styles */
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background: #f8fafc;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        /* Hero Section */
         .hero {
-            @apply bg-gradient-to-r from-blue-600 to-blue-800 text-white py-20;
+            background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
+            color: white;
+            padding: 6rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, #ffffff, #e2e8f0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .button-primary {
+            background: white;
+            color: #1e40af;
+        }
+
+        .button-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-secondary {
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            color: white;
+        }
+
+        .button-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 6rem 0;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            background: linear-gradient(to right, #1e40af, #1e3a8a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 0 1rem;
         }
 
         .feature-card {
-            @apply bg-white p-6 rounded-lg shadow-lg;
-        }
-
-        .tech-badge {
-            @apply px-3 py-1 rounded-full text-sm font-semibold;
-        }
-
-    </style>
-    <style>
-        body {
-            font-family: system-ui, -apple-system, sans-serif;
-            padding: 2rem;
-            background: #f5f5f5;
-            line-height: 1.5;
-        }
-
-        .json-container {
             background: white;
+            border-radius: 1rem;
             padding: 2rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            max-width: 800px;
-            margin: 0 auto;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
-        .key {
-            color: #881391;
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
-        .string {
-            color: #22863a;
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
         }
 
-        .number {
-            color: #005cc5;
+        .feature-card p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
         }
 
-        .boolean {
-            color: #0033b3;
-        }
-
-        .null {
-            color: #808080;
-        }
-
-        .indent {
-            margin-left: 2rem;
-        }
-
-        pre {
+        .feature-card ul {
+            list-style: none;
             margin: 0;
-            white-space: pre-wrap;
+            padding: 0;
         }
-        .content {
-            width: 50%;
-            margin: 0;
 
+        .feature-card li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .feature-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #1e40af;
+        }
+
+        /* JSON Container Styles */
+        .json-container {
+            background: #282a36;
+            border-radius: 0.5rem;
+            padding: 0.5rem;
+            margin: 1rem 0;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.7rem;
+            line-height: 1.5;
+            overflow: auto;
+            max-height: 300px;
+            color: #f8f8f2;
+        }
+
+        .json-container pre {
+            margin: 0;
+        }
+
+        .json-string {
+            color: #50fa7b;
+        }
+
+        .json-number {
+            color: #bd93f9;
+        }
+
+        .json-boolean {
+            color: #ffb86c;
+        }
+
+        .json-null {
+            color: #8be9fd;
+        }
+
+        .json-key {
+            color: #ff79c6;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #1e40af;
+        }
+
+        .feature-card p {
+            color: #4b5563;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .feature-card li {
+            padding-left: 1.5rem;
+            position: relative;
+            margin-bottom: 0.5rem;
+            color: #374151;
+        }
+
+        .feature-card li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #1e40af;
+        }
+
+        .key { color: #ff79c6; }
+        .string { color: #50fa7b; }
+        .number { color: #bd93f9; }
+        .boolean { color: #ffb86c; }
+        .null { color: #8be9fd; }
+
+        /* SVG Container */
+        .svg-container {
+            background: #ffffff;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
 <header class="hero">
-    <div class="container mx-auto px-4">
-        <h1 class="text-5xl font-bold mb-4">gRTSP</h1>
-        <p class="text-xl mb-8">Grid Real-Time Streaming Protocol</p>
-        <p class="text-lg mb-8">Revolutionary approach to intelligent video streaming with ML integration</p>
-        <div class="flex gap-4">
-            <a href="#contact" class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold">Get Started</a>
-            <a href="/docs" class="border border-white text-white px-6 py-2 rounded-lg font-semibold">Documentation</a>
+    <div class="container">
+        <h1>gRTSP</h1>
+        <p class="subtitle">Grid Real-Time Streaming Protocol</p>
+        <p class="description">Revolutionary approach to intelligent video streaming with ML integration</p>
+        <div class="button-group">
+            <a href="#contact" class="button button-primary">Get Started</a>
+            <a href="/docs" class="button button-secondary">Documentation</a>
         </div>
     </div>
 </header>
 
-<section class="py-16">
-    <div class="container mx-auto px-4">
-        <h2 class="text-3xl font-bold mb-12 text-center">Core Technologies</h2>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<section class="features">
+    <div class="container">
+        <h2>Core Technologies</h2>
+        <div class="features-grid">
             <div class="feature-card">
-                <h3 class="text-xl font-semibold mb-4">LSDO</h3>
 
-                <div class="content json-container">
-        <pre>{
-  <span class="key">"masks"</span>: [
+
+                <h3>LSDO</h3>
+                <div class="json-container">
+        <pre><span>{
+  </span><span class="json-key">"masks"</span><span>: [
     {
-      <span class="key">"id"</span>: <span class="string">"privacy-center"</span>,
-      <span class="key">"name"</span>: <span class="string">"Central Privacy Bar"</span>,
-      <span class="key">"svg"</span>: <span class="string">"&lt;rect x='50%' y='35%' width='40%' height='50%' fill='red' /&gt;"</span>,
-      <span class="key">"opacity"</span>: <span class="number">0.5</span>,
-      <span class="key">"enabled"</span>: <span class="boolean">true</span>
+      </span><span class="json-key">"id"</span><span>: </span><span class="json-string">"privacy-center"</span><span>,
+      </span><span class="json-key">"name"</span><span>: </span><span class="json-string">"Central Privacy Bar"</span><span>,
+      </span><span class="json-key">"svg"</span><span>: </span><span class="json-string">"&lt;rect x='50%' y='35%' width='40%' height='50%' fill='red' /&gt;"</span><span>,
+      </span><span class="json-key">"opacity"</span><span>: </span><span class="json-number">0.5</span><span>,
+      </span><span class="json-key">"enabled"</span><span>: </span><span class="json-boolean">true</span><span>
     },
     {
-      <span class="key">"id"</span>: <span class="string">"quality-warning"</span>,
-      <span class="key">"name"</span>: <span class="string">"Low Quality Warning"</span>,
-      <span class="key">"svg"</span>: <span class="string">"&lt;text x='50%' y='10%' text-anchor='middle' fill='red' font-size='24px'&gt;Low Quality Stream&lt;/text&gt;"</span>,
-      <span class="key">"opacity"</span>: <span class="number">0.8</span>,
-      <span class="key">"startTime"</span>: <span class="null">null</span>,
-      <span class="key">"endTime"</span>: <span class="null">null</span>,
-      <span class="key">"enabled"</span>: <span class="boolean">false</span>,
-      <span class="key">"maxBitrate"</span>: <span class="number">5</span>,
-      <span class="key">"minBitrate"</span>: <span class="number">0</span>
+      </span><span class="json-key">"id"</span><span>: </span><span class="json-string">"quality-warning"</span><span>,
+      </span><span class="json-key">"name"</span><span>: </span><span class="json-string">"Low Quality Warning"</span><span>,
+      </span><span class="json-key">"svg"</span><span>: </span><span class="json-string">"&lt;text x='50%' y='10%' text-anchor='middle' fill='red' font-size='24px'&gt;Low Quality Stream&lt;/text&gt;"</span><span>,
+      </span><span class="json-key">"opacity"</span><span>: </span><span class="json-number">0.8</span><span>,
+      </span><span class="json-key">"enabled"</span><span>: </span><span class="json-boolean">false</span><span>,
+      </span><span class="json-key">"maxBitrate"</span><span>: </span><span class="json-number">5</span><span>,
+      </span><span class="json-key">"minBitrate"</span><span>: </span><span class="json-number">0</span><span>
     },
     {
-      <span class="key">"id"</span>: <span class="string">"high-quality-overlay"</span>,
-      <span class="key">"name"</span>: <span class="string">"HD Quality Indicator"</span>,
-      <span class="key">"svg"</span>: <span class="string">"&lt;text x='85%' y='10%' style='stroke:white; stroke-width: 0; fill:white' font-size='50px'&gt;fullHD&lt;/text&gt;"</span>,
-      <span class="key">"opacity"</span>: <span class="number">0.7</span>,
-      <span class="key">"enabled"</span>: <span class="boolean">false</span>,
-      <span class="key">"minBitrate"</span>: <span class="number">20</span>
+      </span><span class="json-key">"id"</span><span>: </span><span class="json-string">"high-quality-overlay"</span><span>,
+      </span><span class="json-key">"name"</span><span>: </span><span class="json-string">"HD Quality Indicator"</span><span>,
+      </span><span class="json-key">"svg"</span><span>: </span><span class="json-string">"&lt;text x='85%' y='10%' style='stroke:white; stroke-width: 0; fill:white' font-size='50px'&gt;fullHD&lt;/text&gt;"</span><span>,
+      </span><span class="json-key">"opacity"</span><span>: </span><span class="json-number">0.7</span><span>,
+      </span><span class="json-key">"enabled"</span><span>: </span><span class="json-boolean">false</span><span>,
+      </span><span class="json-key">"minBitrate"</span><span>: </span><span class="json-number">20</span><span>
     }
   ]
-}</pre>
+}</span></pre>
                 </div>
-                <p class="text-gray-600 mb-4">Layered Streaming with Dynamic Objects enables intelligent object-based
-                    streaming with dynamic quality adaptation.</p>
-                <ul class="space-y-2">
+                <p>Layered Streaming with Dynamic Objects enables intelligent object-based streaming with dynamic quality adaptation.</p>
+                <ul>
                     <li>Dynamic object detection</li>
                     <li>Selective quality enhancement</li>
                     <li>Bandwidth optimization</li>
@@ -133,145 +340,58 @@
             </div>
 
             <div class="feature-card">
-
-
-                <h3 class="text-xl font-semibold mb-4">AGS</h3>
-
-                <div class="content svg-container">
-
+                <h3>AGS</h3>
+                <div class="svg-container">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 300">
+                        <!-- SVG content remains the same -->
                         <defs>
                             <style>
-                                .grid-line {
-                                    stroke: #2C3E50;
-                                    stroke-width: 2;
-                                }
-
-                                .inner-square {
-                                    fill: #3498DB;
-                                    opacity: 0.6;
-                                }
-
+                                .grid-line { stroke: #2C3E50; stroke-width: 2; }
+                                .inner-square { fill: #3498DB; opacity: 0.6; }
                                 @keyframes moveLineDown {
-                                    0%, 100% {
-                                        transform: translateY(0);
-                                    }
-                                    50% {
-                                        transform: translateY(140px);
-                                    }
+                                    0%, 100% { transform: translateY(0); }
+                                    50% { transform: translateY(140px); }
                                 }
-
                                 @keyframes moveLineRight {
-                                    0%, 100% {
-                                        transform: translateX(0);
-                                    }
-                                    50% {
-                                        transform: translateX(140px);
-                                    }
+                                    0%, 100% { transform: translateX(0); }
+                                    50% { transform: translateX(140px); }
                                 }
-
                                 @keyframes pulse1 {
-                                    0%, 100% {
-                                        transform: scale(0.3);
-                                    }
-                                    50% {
-                                        transform: scale(0.9);
-                                    }
+                                    0%, 100% { transform: scale(0.3); }
+                                    50% { transform: scale(0.9); }
                                 }
-
                                 @keyframes pulse2 {
-                                    0%, 100% {
-                                        transform: scale(0.9);
-                                    }
-                                    50% {
-                                        transform: scale(0.3);
-                                    }
+                                    0%, 100% { transform: scale(0.9); }
+                                    50% { transform: scale(0.3); }
                                 }
-
-                                .first-horizontal {
-                                    animation: moveLineDown 8s infinite ease-in-out;
-                                }
-
-                                .first-vertical {
-                                    animation: moveLineRight 8s infinite ease-in-out;
-                                }
-
-                                .pulse-group-1 {
-                                    animation: pulse1 3s infinite ease-in-out;
-                                }
-
-                                .pulse-group-2 {
-                                    animation: pulse2 3s infinite ease-in-out;
-                                }
+                                .first-horizontal { animation: moveLineDown 8s infinite ease-in-out; }
+                                .first-vertical { animation: moveLineRight 8s infinite ease-in-out; }
+                                .pulse-group-1 { animation: pulse1 3s infinite ease-in-out; }
+                                .pulse-group-2 { animation: pulse2 3s infinite ease-in-out; }
                             </style>
                         </defs>
-
-                        <!-- Animowane linie -->
                         <g>
-                            <!-- Pierwsza pozioma linia (ruchoma w dół) -->
                             <line x1="0" y1="100" x2="300" y2="100" class="grid-line first-horizontal"/>
-                            <!-- Pierwsza pionowa linia (ruchoma w prawo) -->
                             <line x1="100" y1="0" x2="100" y2="300" class="grid-line first-vertical"/>
                         </g>
-
-                        <!-- Grupa 1: Narożniki + Środek -->
                         <g class="pulse-group-1">
-                            <!-- Lewy górny -->
-                            <rect x="10" y="10" width="80" height="80" class="inner-square">
-                                <title>Cell 1</title>
-                            </rect>
-
-                            <!-- Prawy górny -->
-                            <rect x="210" y="10" width="80" height="80" class="inner-square">
-                                <title>Cell 3</title>
-                            </rect>
-
-                            <!-- Środek -->
-                            <rect x="110" y="110" width="80" height="80" class="inner-square">
-                                <title>Cell 5</title>
-                            </rect>
-
-                            <!-- Lewy dolny -->
-                            <rect x="10" y="210" width="80" height="80" class="inner-square">
-                                <title>Cell 7</title>
-                            </rect>
-
-                            <!-- Prawy dolny -->
-                            <rect x="210" y="210" width="80" height="80" class="inner-square">
-                                <title>Cell 9</title>
-                            </rect>
+                            <rect x="10" y="10" width="80" height="80" class="inner-square"/>
+                            <rect x="210" y="10" width="80" height="80" class="inner-square"/>
+                            <rect x="110" y="110" width="80" height="80" class="inner-square"/>
+                            <rect x="10" y="210" width="80" height="80" class="inner-square"/>
+                            <rect x="210" y="210" width="80" height="80" class="inner-square"/>
                         </g>
-
-                        <!-- Grupa 2: Środki krawędzi -->
                         <g class="pulse-group-2">
-                            <!-- Górny środkowy -->
-                            <rect x="110" y="10" width="80" height="80" class="inner-square">
-                                <title>Cell 2</title>
-                            </rect>
-
-                            <!-- Prawy środkowy -->
-                            <rect x="210" y="110" width="80" height="80" class="inner-square">
-                                <title>Cell 6</title>
-                            </rect>
-
-                            <!-- Dolny środkowy -->
-                            <rect x="110" y="210" width="80" height="80" class="inner-square">
-                                <title>Cell 8</title>
-                            </rect>
-
-                            <!-- Lewy środkowy -->
-                            <rect x="10" y="110" width="80" height="80" class="inner-square">
-                                <title>Cell 4</title>
-                            </rect>
+                            <rect x="110" y="10" width="80" height="80" class="inner-square"/>
+                            <rect x="210" y="110" width="80" height="80" class="inner-square"/>
+                            <rect x="110" y="210" width="80" height="80" class="inner-square"/>
+                            <rect x="10" y="110" width="80" height="80" class="inner-square"/>
                         </g>
-
-                        <!-- Obramowanie całości -->
                         <rect x="0" y="0" width="300" height="300" fill="none" stroke="#2C3E50" stroke-width="2"/>
                     </svg>
                 </div>
-                <p class="text-gray-600 mb-4">Adaptive Grid Sizing provides intelligent frame partitioning for optimal
-                    resource utilization.</p>
-                <ul class="space-y-2">
+                <p>Adaptive Grid Sizing provides intelligent frame partitioning for optimal resource utilization.</p>
+                <ul>
                     <li>Dynamic grid adaptation</li>
                     <li>ML-driven optimization</li>
                     <li>Real-time scaling</li>
@@ -279,13 +399,88 @@
             </div>
 
             <div class="feature-card">
-                <h3 class="text-xl font-semibold mb-4">ML Integration</h3>
-                <p class="text-gray-600 mb-4">Built-in machine learning capabilities for intelligent streaming
-                    decisions.</p>
-                <ul class="space-y-2">
+                <h3>ML Integration</h3>
+                <div class="svg-container" style="min-height: 200px; display: flex; align-items: center; justify-content: center;">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" width="150" height="150">
+                        <defs>
+                            <style>
+                                @keyframes neuralPulse {
+                                    0%, 100% { opacity: 0.3; }
+                                    50% { opacity: 1; }
+                                }
+                                .neural-connection { stroke: #3498DB; stroke-width: 2; }
+                                .neural-node { fill: #3498DB; }
+                                .pulse { animation: neuralPulse 2s infinite; }
+                            </style>
+                        </defs>
+                        <!-- Neural Network Visualization -->
+                        <g class="pulse">
+                            <!-- Input Layer -->
+                            <circle cx="40" cy="60" r="8" class="neural-node"/>
+                            <circle cx="40" cy="100" r="8" class="neural-node"/>
+                            <circle cx="40" cy="140" r="8" class="neural-node"/>
+
+                            <!-- Hidden Layer -->
+                            <circle cx="100" cy="80" r="8" class="neural-node"/>
+                            <circle cx="100" cy="120" r="8" class="neural-node"/>
+
+                            <!-- Output Layer -->
+                            <circle cx="160" cy="100" r="8" class="neural-node"/>
+
+                            <!-- Connections -->
+                            <line x1="48" y1="60" x2="92" y2="80" class="neural-connection"/>
+                            <line x1="48" y1="60" x2="92" y2="120" class="neural-connection"/>
+                            <line x1="48" y1="100" x2="92" y2="80" class="neural-connection"/>
+                            <line x1="48" y1="100" x2="92" y2="120" class="neural-connection"/>
+                            <line x1="48" y1="140" x2="92" y2="80" class="neural-connection"/>
+                            <line x1="48" y1="140" x2="92" y2="120" class="neural-connection"/>
+
+                            <line x1="108" y1="80" x2="152" y2="100" class="neural-connection"/>
+                            <line x1="108" y1="120" x2="152" y2="100" class="neural-connection"/>
+                        </g>
+                    </svg>
+                </div>
+                <p>Built-in machine learning capabilities for intelligent streaming decisions.</p>
+                <ul>
                     <li>Real-time object detection</li>
                     <li>Predictive streaming</li>
                     <li>Automated optimization</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Dodatkowa sekcja - Use Cases -->
+<section class="features" style="background: #f1f5f9;">
+    <div class="container">
+        <h2>Use Cases</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Video Surveillance</h3>
+                <p>Optimize bandwidth usage while maintaining high quality in critical areas.</p>
+                <ul>
+                    <li>Smart motion detection</li>
+                    <li>Privacy masking</li>
+                    <li>Automated alerts</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Live Streaming</h3>
+                <p>Deliver high-quality content while adapting to network conditions.</p>
+                <ul>
+                    <li>Dynamic quality adaptation</li>
+                    <li>Low latency delivery</li>
+                    <li>Bandwidth optimization</li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <h3>Virtual Reality</h3>
+                <p>Enable immersive experiences with intelligent streaming.</p>
+                <ul>
+                    <li>View-dependent streaming</li>
+                    <li>Predictive loading</li>
+                    <li>Reduced motion sickness</li>
                 </ul>
             </div>
         </div>
